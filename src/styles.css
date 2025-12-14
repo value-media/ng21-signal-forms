@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+
+input {
+  
+    &.ng-untouched {
+        background: 2px solid rgba(white, 0.05);
+    }
+
+    &.ng-touched {
+        background: 2px solid rgba(#007bff, 0.15);
+    }
+
+    &.ng-dirty {
+        box-shadow: 0 0 0 2px rgba(#007bff, 0.12);
+    }
+
+    &.ng-touched.ng-invalid {
+        border-color: #e53935;
+        border-width: 3px;
+        border-style: solid;
+    }
+
+    &.ng-pending {
+        border: 2px solid orange;
+    }
+
+    &.ng-touched.ng-valid {
+        border: 2px solid #43a047;
+    }
+
+}
+
+body {
+    font-family: sans-serif;
+    background-color: whitesmoke;
+}

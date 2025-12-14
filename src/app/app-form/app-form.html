@@ -1,0 +1,34 @@
+
+
+<form class="test-ng-form">
+    <label>
+        Name:
+        <input [field]="form.name" />
+        @if (form.name().invalid() && (form.name().touched() || submitted()) && form.name().errors().length > 0) {            
+            <span class="error">{{ (form.name().errors()[0].message) }}</span>
+        }    
+    </label>
+    <label>
+        Email:
+        <input [field]="form.email" />
+        @if (form.email().invalid() && (form.email().touched() || submitted()) && form.email().errors().length > 0) {            
+            <span class="error">{{ (form.email().errors()[0].message) }}</span>
+        }    
+    </label>
+
+    <label>
+        Age:
+        <input type="number" [field]="form.age" />
+        @if (form.age().invalid() && (form.age().touched() || submitted()) && form.age().errors().length > 0) {            
+            <span class="error">{{ (form.age().errors()[0].message) }}</span>
+        }    
+    </label>
+    
+    <button type="submit" [class.form-invalid]="form().invalid()" (click)="onSubmit($event)">Submit</button>
+</form>
+
+<div class="form-result">
+    <div>Form - valid: {{ form().valid() }}, Submitted: {{ submitted() }} </div>
+    <pre>{{ result | json }}</pre>
+</div>
+
