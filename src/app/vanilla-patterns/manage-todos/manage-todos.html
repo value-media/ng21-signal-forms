@@ -1,0 +1,24 @@
+<div class="page-header">
+  <button (click)="fetchItems()" class="fetch-btn" [class.fetching]="service.isLoading()">fetch / reset</button>
+  <div class="fetching-info">
+    pobieranie danych z https://jsonplaceholder.typicode.com/todos ..
+  </div>
+</div>
+
+<app-todo-stats class="todo-stats"></app-todo-stats>
+
+@if (service.items().length === 0) {
+  <p>brak zadań na liście, załaduj dane</p>
+} @else {
+  <div class="todo-list-label">Lista rzeczy do zrobienia:</div>
+  <div class="todo-list">
+    @for (item of service.items(); track item.id) {
+      <app-todo-item [item]="item" ></app-todo-item>
+    }
+  </div>
+}
+
+<footer class="manage-todos-footer">
+  <button (click)="addNew()" class="add-todo-btn"> <span>➕</span> Nowe zadanie</button>
+</footer>
+  

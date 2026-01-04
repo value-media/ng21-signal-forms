@@ -1,0 +1,18 @@
+
+.todo-stats {
+    min-width: 10em;
+    display: block;
+    padding: 1em;
+
+    header {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 0.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .item {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+}

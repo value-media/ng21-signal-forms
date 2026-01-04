@@ -3,6 +3,9 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
+    "cache": {
+      "enabled": true
+    },
     "analytics": false
   },
   "newProjectRoot": "projects",

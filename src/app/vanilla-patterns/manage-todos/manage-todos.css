@@ -1,0 +1,99 @@
+:host {
+    position: relative;
+}
+
+.page-header {
+    position: relative;
+    padding-right: 6rem;
+    margin: 0.5em;
+    color: purple;
+
+    .fetch-btn {
+        margin-left: 1em;
+        anchor-name: --fetch-btn;
+    }
+
+    .fetching-info {
+        position: absolute;
+        font-size: 0.75em;
+        color: black;
+        padding: 0.25em 0.5em;
+        border: 1px solid #ccc;
+        border-radius: 1em;
+        margin-left: 1em;
+        padding: 1em 1.5em;
+        position-area: right;
+        position-anchor: --fetch-btn;
+        background: #f9f9f9;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transition: opacity 2s ease-in-out;
+        z-index: 2;
+    }
+
+    .fetching + .fetching-info {
+        opacity: 1;
+        transition: opacity 0s;
+    }
+}
+
+.todo-stats {
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    background-color: whitesmoke;
+    z-index: 10;
+}
+
+.todo-list-label {
+    font-weight: bold;
+    font-style: italic;
+    color: dimgray;
+    margin: 1.5rem auto;
+    width: min(60rem, 90vw);
+    font-size: 1.4em;
+}
+
+.todo-list {
+    margin: 2rem auto;
+    width: min(60rem, 90vw);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    --completed-bg: gainsboro;
+}
+
+.just-added {
+    animation: highlight-new-todo 1s ease-in-out;
+}
+
+@keyframes highlight-new-todo {
+    0% {
+        box-shadow: 0;
+    }
+    80% {
+        box-shadow: 0 0 10px 5px blue;
+    }
+    100% {
+        box-shadow: 0;
+    }
+}
+
+.manage-todos-footer {
+    margin: 2rem auto;
+    width: min(60em, 80vw);
+    color: gray;
+
+    .add-todo-btn {
+        padding: 1em 2em;
+        border-radius: 1.5em;
+
+        span {
+            display: inline-block;
+            margin-left: -1em;
+            margin-right: 0.5em;
+        }
+    }
+}

@@ -1,17 +1,18 @@
 
 <main class="main">
+  <nav>
+    <a href="https://itnext.io/signal-forms-just-got-automatic-state-classes-and-more-f1fcf87cff78" class="article"
+      target="_blank" rel="noopener noreferrer" title="artykuł o Signal Forms w Angular@21">artykuł</a>
+      
+    <a routerLink="/form" routerLinkActive="active">Formularz</a>
+    <a routerLink="/mansonry" routerLinkActive="active">Mansonry grid</a>
+    <a routerLink="/vanilla-patterns" routerLinkActive="active">Vanilla Patterns</a>
+  </nav>
+  <hr />
   <div class="content">
-    <nav>
-      <a href="https://itnext.io/signal-forms-just-got-automatic-state-classes-and-more-f1fcf87cff78" 
-        target="_blank" rel="noopener noreferrer">artykuł o Signal Forms w Angular@21</a>
-        
-      <a routerLink="/form" routerLinkActive="active">Formularz</a>
-    </nav>
-    <hr />
+    <router-outlet></router-outlet>
   </div>
+
 </main>
 
-<app-app-form></app-app-form>
-<router-outlet />
 
-<!-- https://angular.dev/guide/forms/signals/validation -->

@@ -1,0 +1,13 @@
+<div class="mansonry-grid">
+    @for (tile of tiles; track tile.index) {
+        <div class="tile" [style.height.px]="tile.height"  title="{{tile.title}}">
+            <div class="title">{{tile.title}}</div>
+            <div class="content">
+                {{tile.text}}             
+            </div>
+            <div class="height-label">
+                {{ getHeightLabel(tile.index) }}   
+            </div>
+        </div>
+    }
+</div>

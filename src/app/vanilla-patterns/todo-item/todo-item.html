@@ -1,0 +1,16 @@
+
+<label appDebugCd >
+    <input type="checkbox" [checked]="!!item.completed" (change)="onCompletedChange($event)" title="completed"/>
+    {{item.title}}
+    <button class="btn edit-btn" (click)="showEditDialog()" title="edit">✎</button>
+    <button class="btn delete-btn" (click)="service.deleteTodo(item.id)" title="Usuń">🗑</button>
+</label>
+
+
+<dialog #editDialog (submit)="onEditSubmit($event)" class="edit-dialog" [style.position-anchor]="'--item-box-' + item.id">
+  <form method="dialog" class="edit-todo-form">
+    <input #editInput class="title-input" [field]="editForm.title">
+    <button type="button" class="cancel-btn" (click)="onCancelEdit()" title="Anuluj">↩</button>
+    <button type="submit" class="save-btn" title="Zapisz">💾</button>
+  </form>
+</dialog>

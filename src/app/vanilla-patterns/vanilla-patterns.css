@@ -1,0 +1,33 @@
+.title {
+    padding-bottom: 0.25em;
+    border-bottom: 1px gainsboro solid;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    justify-content: space-between;
+    padding-inline: 1em;
+}
+
+.article {
+    anchor-name: --article-start;
+}
+
+.article:hover + .article-tooltip {
+    visibility: visible;
+}
+
+.article-tooltip {
+    position: absolute;
+    position-anchor: --article-start;
+    position-area: left bottom;
+    visibility: hidden;
+    border-radius: 1em 0 1em 1em;
+    padding: 0.75em 1em;
+    max-width: 20em;
+    background: lightyellow;
+    border: 1px solid gold;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 11;
+}
+
+

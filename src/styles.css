@@ -34,3 +34,64 @@ body {
     font-family: sans-serif;
     background-color: whitesmoke;
 }
+
+
+a[routerlinkactive] {
+    text-decoration: none;
+    color: gray; 
+    font-weight: normal;
+    transition: color 0.3s ease; 
+}
+
+a.active {
+    color: navy;
+    font-weight: bold; 
+}
+
+a.article {
+    scale: 0.7;
+    margin-inline: 1em;
+    color: #555;
+    transition: all 0.3s ease;
+    text-decoration: none;
+
+    &:hover {
+        color: #000;
+        scale: 1.0;
+    }
+}
+
+button {
+    margin-inline: 1em;
+    cursor: pointer;
+    padding: 0.5em 1em;
+    border: none;
+    background-color: skyblue;
+    color: white;
+    border-radius: 1em;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #0056b3;
+    }
+
+    &:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
+}
+
+:root {
+    --cd-debug-bg: lavender;
+    --cd-debug-border: purple;
+}
+
+.cd-global-hit  {
+  outline: 1px solid var(--cd-debug-border);
+  box-shadow: 0 4px 12px 6px var(--cd-debug-border);
+  border-radius: 0.5em;
+  background: var(--cd-debug-bg) !important;
+  transition: all 0.3s ease-in-out;
+  padding: 0.5em;
+}
