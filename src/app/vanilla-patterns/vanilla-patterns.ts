@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RolesService } from '../services/roles.service';
 
 @Component({
   selector: 'app-vanilla-patterns',
@@ -8,5 +9,5 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './vanilla-patterns.css',
 })
 export class VanillaPatterns {
-
+  rolesService = inject(RolesService);
 }

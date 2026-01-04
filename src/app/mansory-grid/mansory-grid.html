@@ -1,6 +1,6 @@
 <div class="mansonry-grid">
     @for (tile of tiles; track tile.index) {
-        <div class="tile" [style.height.px]="tile.height"  title="{{tile.title}}">
+        <div *hideElement="!!(tile.index % 2) || rolesService.isAdmin()" class="tile" [style.height.px]="tile.height"  title="{{tile.title}}">
             <div class="title">{{tile.title}}</div>
             <div class="content">
                 {{tile.text}}             

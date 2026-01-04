@@ -3,7 +3,7 @@
     <input type="checkbox" [checked]="!!item.completed" (change)="onCompletedChange($event)" title="completed"/>
     {{item.title}}
     <button class="btn edit-btn" (click)="showEditDialog()" title="edit">✎</button>
-    <button class="btn delete-btn" (click)="service.deleteTodo(item.id)" title="Usuń">🗑</button>
+    <button adminRole class="btn delete-btn" (click)="service.deleteTodo(item.id)" title="Usuń">🗑</button>
 </label>
 
 

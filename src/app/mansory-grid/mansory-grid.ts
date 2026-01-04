@@ -1,17 +1,20 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { compose } from '../helpers';
 import { TodoItemsService } from '../vanilla-patterns/items-service';
+import { HideElementDirective } from '../directives/hide-element.directive';
+import { RolesService } from '../services/roles.service';
 
 type Tile = { text: string; title: string; height: number, index: number };
 
 @Component({
   selector: 'app-mansory-grid',
-  imports: [],
+  imports: [ HideElementDirective ],
   templateUrl: './mansory-grid.html',
   styleUrl: './mansory-grid.css',
 })
 export class MansoryGrid implements OnDestroy{
   public service = inject(TodoItemsService);
+  public rolesService = inject(RolesService);
   tiles: Tile[] = [];
   unsubscribeTodos: () => boolean;
 

@@ -4,6 +4,8 @@ import { TodoItem } from '../types/todo-item';
 import { TodoItemsService } from '../items-service';
 import { form, Field, required } from '@angular/forms/signals';
 import { CommonModule } from '@angular/common';
+import { RolesService } from '../../services/roles.service';
+import { AdminRoleDirective } from '../../directives/admin-role.directive';
 
 @Component({
   selector: 'app-todo-item',
@@ -15,13 +17,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './todo-item.css',
   // hostDirectives: [DebugCd], // wyłączone, bo powoduje odświeżanie wszystkich elementów listy przy zmianie jednego
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DebugCd, Field, CommonModule]
+  imports: [DebugCd, Field, CommonModule, AdminRoleDirective]
 })
 export class TodoItemComponent {
   @ViewChild('editDialog') editDialog!: ElementRef<HTMLDialogElement>;
   @ViewChild('editInput') editInput!: ElementRef<HTMLInputElement>;
   @Input({ required: true }) item!: TodoItem;
   public service = inject(TodoItemsService);
+  rolesService = inject(RolesService);
   protected editModel = signal<TodoItem>({
     completed: false,
     id: 0,
