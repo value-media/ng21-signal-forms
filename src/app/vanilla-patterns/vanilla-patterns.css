@@ -6,6 +6,21 @@
     gap: 1em;
     justify-content: space-between;
     padding-inline: 1em;
+
+    label:has(input[type="checkbox"]) {        
+        cursor: pointer;
+        min-width: 10em;
+
+        input[type="checkbox"] {
+            accent-color: navy;
+            cursor: pointer;
+        }
+    }
+
+    label:has(input[type="checkbox"]:checked) {
+        color: navy;
+        font-weight: bold;
+    }
 }
 
 .article {
