@@ -2,9 +2,13 @@
 <label appDebugCd >
     <input type="checkbox" [checked]="!!item.completed" (change)="onCompletedChange($event)" title="completed"/>
     {{item.title}}
-    <button class="btn edit-btn" (click)="showEditDialog()" title="edit">✎</button>
-    <button adminRole class="btn delete-btn" (click)="service.deleteTodo(item.id)" title="Usuń">🗑</button>
 </label>
+
+<button class="btn actions-btn" [attr.popovertarget]="'menu-'+item.id">⋮</button>
+<div class="actions-menu" popover [id]="'menu-'+item.id">
+  <button class="edit-btn"  (click)="showEditDialog()" title="Edytuj">✎</button>
+  <button class="delete-btn" adminRole (click)="service.deleteTodo(item.id)" title="Usuń">🗑</button>
+</div>
 
 
 <dialog #editDialog (submit)="onEditSubmit($event)" class="edit-dialog" [style.position-anchor]="'--item-box-' + item.id">

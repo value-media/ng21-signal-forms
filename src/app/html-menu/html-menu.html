@@ -1,0 +1,18 @@
+<button popovertarget="menu" class="user-button">Miesiące ▾</button>
+
+<div id="menu" popover>
+
+  @for (m of yearMonths; track m) {
+    <label class="card">
+      {{m}}
+      <input type="checkbox" [name]="'m'+m" [id]="'m'+m">
+    </label>
+  }
+
+</div>
+
+
+<!-- 
+inspiracja:
+https://medium.com/@TusharKanjariya/i-stopped-using-javascript-for-menus-f94335faf876 
+-->

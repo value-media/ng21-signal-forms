@@ -48,23 +48,66 @@
         transition: all 0.2s ease;
     }
 
-     .delete-btn {
-        right: 0;
 
+.actions-btn {
+    margin-top: 0.25em;
+    right: 0.5em;
+
+  background: none;
+  border: none;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.actions-menu {
+  position-anchor: var(--anchor);
+  position-area: left;
+  margin-top: 1px;
+  width: max-content;
+  line-height: 2.5em;
+
+  background: none;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 4px;
+
+  display: none;
+  transition: all 0.5s ease;
+  
+  opacity: 0;
+  transition-behavior: allow-discrete;
+
+  button {
+    padding: 2px;
+    background: none;
+    color: #111;
+    border: none;
+  }
+  
+
+    .delete-btn {
         &:hover {
             color: red;
-            scale: 1.4;
+            scale: 1.2;
+            font-weight: bolder;
         }
     }
 
-     .edit-btn {
-        right: 2em;
-
+    .edit-btn {
         &:hover {
             color: black;
-            scale: 1.4;
+            scale: 1.2;
+            font-weight: bold;
         }
     }
+}
+
+.actions-menu:popover-open {
+  display: flex;  
+  gap: 0.25em;
+  opacity: 0.9;
+}
 
     .edit-dialog {
         background-color: inherit;

@@ -15,6 +15,10 @@ export const routes: Routes = [
         loadComponent: () => import('./mansory-grid/mansory-grid').then(m => m.MansoryGrid)
     },
     {
+        path: 'menu',
+        loadComponent: () => import('./html-menu/html-menu').then(m => m.HtmlMenu)
+    },
+    {
         path: 'vanilla-patterns',
         loadComponent: () => import('./vanilla-patterns/vanilla-patterns').then(m => m.VanillaPatterns),
         children: [
