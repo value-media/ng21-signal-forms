@@ -2,6 +2,12 @@
   display: flex;
 }
 
+#menu:popover-open + .user-button {
+    background: dodgerblue;
+    color: white;
+    border-color: white;
+} 
+
 .user-button {
     anchor-name: --user;
     background: none;
@@ -50,7 +56,12 @@
 }
 
 .card:has(input[type="checkbox"]:checked) {
-  background: #1976d2;
+  background: dodgerblue;
   color: #fff;
+}
+
+.month-selected {
+  outline: 3px solid dodgerblue;
+  border: none;
 }
 

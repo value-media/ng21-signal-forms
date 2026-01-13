@@ -1,16 +1,21 @@
-<button popovertarget="menu" class="user-button">Miesiące ▾</button>
 
 <div id="menu" popover>
-
   @for (m of yearMonths; track m) {
     <label class="card">
       {{m}}
-      <input type="checkbox" [name]="'m'+m" [id]="'m'+m">
+      <input type="checkbox" [name]="'m'+m" [id]="'m'+m" (value)="m" 
+        (input)="onMonthChange($event, m)" 
+        [checked]="selectedMonths.includes(m)" />
     </label>
   }
-
 </div>
 
+<button popovertarget="menu" class="user-button" [class.month-selected]="monthsSelected">Miesiące ▾</button>
+
+
+<p>
+  Wybrane miesiące: {{selectedMonths.join(', ')}}
+</p>
 
 <!-- 
 inspiracja:
