@@ -19,17 +19,19 @@
             transition-behavior: allow-discrete;
             transition-property: display, width, padding, transform, opacity;
             transition-duration: 500ms;
-            background-color: #f0f0f0;
+            background-color: aliceblue;
+            border: 1px lightskyblue solid;
             border-radius: 1em;
-            max-width: 20em;
+            max-width: 15em;
             flex-direction: column;
             align-items: center;
+            min-height: 60vh;
             gap: 1em;
         }
         #toggle:checked ~ aside {
             display: flex;
             width: 14em;
-            padding: 1em;
+            padding: 5em 1em 3em 1em;
             transform: translateX(0);
             opacity: 1;
         }
@@ -47,33 +49,69 @@
             position: absolute;
             margin-top: -0.5em;
             top:1em;
-            left: 1em;
+            left: 2em;
             cursor: pointer;
-            padding: 0.5em 1em;
-            background-color: #007BFF;
+            padding: 0.5em 0.75em;
+            background-color: gainsboro;
             color: white;
             border-radius: 0.5em;
+            transition: transform 0.5s ease-out, background-color 0.5s ease-out;
+
+            &:hover {
+                background-color: #007BFF;
+            }
+        }
+        label[for="toggle"]::after {
+            content: " ☰";
+        }
+        nav:has(#toggle:checked) label[for="toggle"] {
+            background-color: aliceblue;
+            color: lightskyblue;
+            transform: translateY(3.5em) translateX(12em);
+            z-index: 10;
+            transition: transform 0.5s ease-out, background-color 0.5s ease-in;
+
+            &:hover {
+                background-color: #007BFF;
+                color: white;
+            }
+        }
+        nav:has(#toggle:checked) label[for="toggle"]::after {
+            content: " ◀";
         }
         #content {
-            margin-top: 2em;
             background-color: whitesmoke;
             padding: 1em;
             border-radius: 1em;
             display: grid;
             place-content: center;
             flex: 1;
+            min-height: 60vh;
         }
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            gap: 1em;
-            padding: 3em 1em;
+            gap: 0.5em;
+            padding: 3em 0.5em;
+        }
+
+        #menu {
+
+            a {
+                min-width: 10em;
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+                background-color: #007BFF;
+                padding: 0.5em 1em;
+                border-radius: 0.5em;
+            }
         }
     </style>
 </head>
 <body>
     <nav>
-        <label for="toggle" >Menu</label>
+        <label for="toggle" title="pokazywanie menu"></label>
         <input type="checkbox" id="toggle" title="pokaż menu" />
         <aside id="menu" >
             <a href="#">Home</a>
