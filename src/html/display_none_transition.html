@@ -64,7 +64,7 @@
         label[for="toggle"]::after {
             content: " ☰";
         }
-        nav:has(#toggle:checked) label[for="toggle"] {
+        #panel:has(#toggle:checked) label[for="toggle"] {
             background-color: aliceblue;
             color: lightskyblue;
             transform: translateY(3.5em) translateX(12em);
@@ -76,17 +76,41 @@
                 color: white;
             }
         }
-        nav:has(#toggle:checked) label[for="toggle"]::after {
+        #panel:has(#toggle:checked) label[for="toggle"]::after {
             content: " ◀";
         }
         #content {
             background-color: whitesmoke;
-            padding: 1em;
+            padding: 1em 2em;
             border-radius: 1em;
-            display: grid;
-            place-content: center;
             flex: 1;
             min-height: 60vh;
+            overflow-y: auto;
+        }
+
+        #content section {
+            margin-block: 2em;
+            padding-bottom: 1.5em;
+            border-bottom: 1px solid #ddd;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            h1, h2, h3 {
+                color: #2e7d32;
+                margin-bottom: 0.5em;
+            }
+
+            ul {
+                padding-left: 1.5em;
+                line-height: 2;
+            }
+
+            p {
+                line-height: 1.7;
+                color: #333;
+            }
         }
         body {
             font-family: Arial, sans-serif;
@@ -95,8 +119,81 @@
             padding: 3em 0.5em;
         }
 
-        #menu {
+        #toggle2 {
+            display: none;
+        }
 
+        #menu2 {
+            transform: translateX(100%);
+        }
+
+        label[for="toggle2"] {
+            position: absolute;
+            top: 1em;
+            right: 2em;
+            cursor: pointer;
+            padding: 0.5em 0.75em;
+            background-color: gainsboro;
+            color: white;
+            border-radius: 0.5em;
+            transition: transform 0.5s ease-out, background-color 0.5s ease-out;
+
+            &:hover {
+                background-color: #e07020;
+            }
+        }
+
+        label[for="toggle2"]::after {
+            content: " ☰";
+        }
+
+        #toggle2:checked ~ aside {
+            display: flex;
+            width: 14em;
+            padding: 5em 1em 3em 1em;
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        @starting-style {
+            #toggle2:checked ~ aside {
+                width: 0;
+                padding: 0;
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        #panel2:has(#toggle2:checked) label[for="toggle2"] {
+            background-color: aliceblue;
+            color: lightskyblue;
+            transform: translateY(3.5em) translateX(-12em);
+            z-index: 10;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.5s ease-in;
+
+            &:hover {
+                background-color: #e07020;
+                color: white;
+            }
+        }
+
+        #panel2:has(#toggle2:checked) label[for="toggle2"]::after {
+            content: " ▶";
+        }
+
+        #menu2 a {
+            background-color: #e07020;
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            border-radius: 0.5em;
+
+            &:hover {
+                background-color: #007BFF;
+            }
+        }
+
+        #menu {
             a {
                 min-width: 10em;
                 text-decoration: none;
@@ -107,19 +204,88 @@
                 border-radius: 0.5em;
             }
         }
+
+        #content section {
+            margin-block: 2em;
+            padding-bottom: 1.5em;
+            border-bottom: 1px solid #ddd;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            h1, h2, h3 {
+                color: #2e7d32;
+                margin-bottom: 0.5em;
+            }
+
+            ul {
+                padding-left: 1.5em;
+                line-height: 2;
+            }
+
+            p {
+                line-height: 1.7;
+                color: #333;
+            }
+        }
     </style>
 </head>
 <body>
-    <nav>
+    <nav id="panel">
         <label for="toggle" title="pokazywanie menu"></label>
         <input type="checkbox" id="toggle" title="pokaż menu" />
         <aside id="menu" >
-            <a href="#">Home</a>
-            <a href="#">About</a>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
         </aside>
     </nav>
     <main id="content">
-        Treść strony
+        <section id="home">
+            <h1>🌱 Witaj w OgrodnikPro</h1>
+            <p>Odkryj sekrety pięknego ogrodu. Każdego tygodnia nowe porady dotyczące pielęgnacji roślin, planowania rabat i zwalczania szkodników.</p>
+            <h2>Porada tygodnia</h2>
+            <p>🌧️ <strong>Marzec</strong> to idealna pora na przygotowanie gleby pod rozsady. Przekop grządki na głębokość 30 cm i wymieszaj z kompostem.</p>
+        </section>
+        <section id="about">
+            <h2>O nas</h2>
+            <p>Jesteśmy grupą pasjonatów ogrodnictwa z ponad 20-letnim doświadczeniem. Nasza misja to dzielenie się wiedzą o uprawie warzyw, ziół i roślin ozdobnych w każdych warunkach.</p>
+            <ul>
+                <li>🥕 Warzywa sezonowe</li>
+                <li>🌿 Zioła i rośliny lecznicze</li>
+                <li>🌸 Rośliny ozdobne i rabatowe</li>
+                <li>🐛 Naturalne metody ochrony roślin</li>
+            </ul>
+        </section>
+        <section id="settings">
+            <h2>Ustawienia powiadomień</h2>
+            <p>Dostosuj, o czym chcesz być informowany:</p>
+            <ul>
+                <li>📅 Przypomnienia o podlewaniu</li>
+                <li>🌡️ Alerty pogodowe (przymrozki)</li>
+                <li>🗓️ Kalendarz ogrodnika — terminy siewu i zbiorów</li>
+                <li>📰 Nowe artykuły i porady</li>
+            </ul>
+        </section>
+        <section id="profile">
+            <h2>Mój ogród</h2>
+            <p>Strefa: <strong>3b (centralna Polska)</strong></p>
+            <p>Typ gleby: <strong>gliniasto-piaszczysta</strong></p>
+            <h3>Moje rośliny</h3>
+            <ul>
+                <li>🍅 Pomidory malinowe — 6 sztuk</li>
+                <li>🥒 Ogórki gruntowe — 3 sztuki</li>
+                <li>🌻 Słoneczniki — rabata wschodnia</li>
+            </ul>
+        </section>
     </main>
+    <nav id="panel2">
+        <label for="toggle2" title="pokazywanie menu 2"></label>
+        <input type="checkbox" id="toggle2" title="pokaż menu 2" />
+        <aside id="menu2">
+            <a href="#settings">Settings</a>
+            <a href="#profile">Profile</a>
+        </aside>
+    </nav>
 </body>
 </html>
