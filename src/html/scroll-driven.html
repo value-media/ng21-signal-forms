@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll driven</title>
+    <style>
+        body {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h1 id="title">Scroll driven</h1>
+        <div id="tooltip">
+            Przykładowy kod demonstrujący działanie scroll-driven animations. Przewiń w dół, aby zobaczyć efekt.
+        </div>
+        <style>
+            #title {
+                margin-top: 10px;
+                font-size: 2em;
+                z-index: 1000;
+                anchor-name: --title;
+            }
+            #tooltip {
+                scale: 0;
+                opacity: 0;
+                position: absolute;
+                position-anchor: --title;
+                top: anchor(bottom);
+                left: anchor(left);
+                background-color: rgba(0, 0, 0, 0.7);
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                z-index: 1000;
+                transition: scale 0.3s ease-in-out;
+                margin-left: -200px;
+                transform: translate(200px, 0);
+            }
+            #title:hover + #tooltip {
+                scale: 1;
+                opacity: 1;
+            }
+        </style>
+    </section>
+
+        <section class="top-bar">
+            <div class="progress-bar" id="progressBar"></div>
+            <style>
+                @keyframes fill-progress {
+                    from { transform: scaleX(0); background-color: white; }
+                    to { transform: scaleX(1); background-color: dimgray; }
+                }
+                .top-bar {
+                    position: fixed;
+                    background-color: whitesmoke;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 20px;
+                    z-index: 100;
+                }
+                .progress-bar {
+                    width: 100%;
+                    height: 20px;
+                    background-color: #f0f0f0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    transform-origin: left; 
+                    animation: fill-progress linear;
+                    animation-timeline: scroll();
+                }
+            </style>
+        </section>
+        <section class="card-container">
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <div class="card">Card </div>
+            <style>
+                .card-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 20px;
+                }
+                .card {
+                    min-width: 200px;
+                    min-height: 120px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: #f0f0f0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+            </style>
+        </section>
+        <section class="siblings-container">
+            <div class="sibling">Sibling</div>
+            <div class="sibling">Sibling</div>
+            <div class="sibling">Sibling</div>
+            <div class="sibling">Sibling</div>
+            <div class="sibling">Sibling</div>
+            <style>
+                .siblings-container {
+                    display: flex;
+                    gap: 20px;
+                    margin-top: 50px;
+                }
+                .sibling {
+                    width: calc(100% / sibling-count());
+                    height: 100px;
+                    background-color: #f0f0f0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    transition: transform 0.3s ease-in-out;
+                    display: grid;
+                    place-items: center;
+                }
+                .sibling:hover {
+                    transform: scale(1.1);
+                }
+            </style>
+        </section>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display:none transition</title>
+    <style>
+        #toggle {
+            display: none;
+        }
+        aside {
+            display: none;
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+            flex-shrink: 0;
+            transform: translateX(-100%);
+            opacity: 0;
+            transition-behavior: allow-discrete;
+            transition-property: display, width, padding, transform, opacity;
+            transition-duration: 500ms;
+            background-color: #f0f0f0;
+            border-radius: 1em;
+            max-width: 20em;
+            flex-direction: column;
+            align-items: center;
+            gap: 1em;
+        }
+        #toggle:checked ~ aside {
+            display: flex;
+            width: 14em;
+            padding: 1em;
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        @starting-style {
+            #toggle:checked ~ aside {
+                width: 0;
+                padding: 0;
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+
+        label[for="toggle"] {
+            position: absolute;
+            margin-top: -0.5em;
+            top:1em;
+            left: 1em;
+            cursor: pointer;
+            padding: 0.5em 1em;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 0.5em;
+        }
+        #content {
+            margin-top: 2em;
+            background-color: whitesmoke;
+            padding: 1em;
+            border-radius: 1em;
+            display: grid;
+            place-content: center;
+            flex: 1;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            gap: 1em;
+            padding: 3em 1em;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <label for="toggle" >Menu</label>
+        <input type="checkbox" id="toggle" title="pokaż menu" />
+        <aside id="menu" >
+            <a href="#">Home</a>
+            <a href="#">About</a>
+        </aside>
+    </nav>
+    <main id="content">
+        Treść strony
+    </main>
+</body>
+</html>
