@@ -5,92 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display:none transition</title>
     <style>
-        #toggle {
-            display: none;
-        }
-        aside {
-            display: none;
-            width: 0;
-            padding: 0;
-            overflow: hidden;
-            flex-shrink: 0;
-            transform: translateX(-100%);
-            opacity: 0;
-            transition-behavior: allow-discrete;
-            transition-property: display, width, padding, transform, opacity;
-            transition-duration: 500ms;
-            background-color: aliceblue;
-            border: 1px lightskyblue solid;
-            border-radius: 1em;
-            max-width: 15em;
-            flex-direction: column;
-            align-items: center;
-            overflow-y: auto;
-            gap: 1em;
-            min-height: 80vh;
-        }
-        #toggle:checked ~ aside {
+        body {
+            font-family: Arial, sans-serif;
             display: flex;
-            width: 14em;
-            padding: 5em 1em 3em 1em;
-            transform: translateX(0);
-            opacity: 1;
+            gap: 0.5em;
+            padding: 0.5em;
+            height: 100vh;
+            overflow: hidden;
+            box-sizing: border-box;
         }
 
-        @starting-style {
-            #toggle:checked ~ aside {
-                width: 0;
-                padding: 0;
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-        }
-
-        label[for="toggle"] {
-            position: fixed;
-            top: 1.5em;
-            left: 2em;
-            cursor: pointer;
-            padding: 0.5em 0.75em;
-            background-color: gainsboro;
-            color: white;
-            border-radius: 0.5em;
-            transition: transform 0.5s ease-out, background-color 0.5s ease-out;
-
-            &:hover {
-                background-color: #007BFF;
-            }
-        }
-        label[for="toggle"]::after {
-            content: " ☰";
-        }
-        #panel:has(#toggle:checked) label[for="toggle"] {
-            background-color: aliceblue;
-            color: lightskyblue;
-            transform: translateX(12em);
-            z-index: 10;
-            transition: transform 0.5s ease-out, background-color 0.5s ease-in;
-
-            &:hover {
-                background-color: #007BFF;
-                color: white;
-            }
-        }
-        #panel:has(#toggle:checked) label[for="toggle"]::after {
-            content: " ◀";
-        }
         #content {
             background-color: whitesmoke;
             padding: 1em 2em;
             border-radius: 1em;
             flex: 1;
             overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
         #content section {
             margin-block: 2em;
-            padding-bottom: 1.5em;
+            padding: 2em;
             border-bottom: 1px solid #ddd;
+            background-color: white;
+            border-radius: 0.5em;
+            margin-inline: 2em;
             min-height: 50vh;
 
             &:last-child {
@@ -112,54 +52,107 @@
                 color: #333;
             }
         }
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            gap: 0.5em;
-            padding: 0.5em;
-            height: 100vh;
-            overflow: hidden;
-            box-sizing: border-box;
-        }
 
-        #toggle2 {
+
+        /* --- ukryty checkbox wyzwalający --- */
+        .nav-toggle {
             display: none;
         }
 
-        #menu2 {
-            transform: translateX(100%);
+        /* --- panel boczny --- */
+        .nav-menu {
+            display: none;
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+            flex-shrink: 0;
+            opacity: 0;
+            transition-behavior: allow-discrete;
+            transition-property: display, width, padding, transform, opacity;
+            transition-duration: 500ms;
+            background-color: aliceblue;
+            border: 1px lightskyblue solid;
+            border-radius: 1em;
+            max-width: 15em;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            gap: 1em;
+            min-height: 80vh;
         }
 
-        label[for="toggle2"] {
-            position: fixed;
-            top: 1.5em;
-            right: 3em;
-            cursor: pointer;
-            padding: 0.5em 0.75em;
-            background-color: gainsboro;
-            color: white;
-            border-radius: 0.5em;
-            transition: transform 0.5s ease-out, background-color 0.5s ease-out;
-
-            &:hover {
-                background-color: #e07020;
-            }
-        }
-
-        label[for="toggle2"]::after {
-            content: " ☰";
-        }
-
-        #toggle2:checked ~ aside {
+        /* stan otwarty (wspólny) */
+        .nav-toggle:checked ~ .nav-menu {
             display: flex;
-            width: 14em;
+            width: var(--nav-panel-width);
             padding: 5em 1em 3em 1em;
             transform: translateX(0);
             opacity: 1;
         }
 
+        /* --- przycisk hamburger (wspólny) --- */
+        .nav-panel {
+            --nav-panel-width: 14em;
+        }
+
+        .nav-panel label {
+            position: fixed;
+            top: 1.5em;
+            cursor: pointer;
+            padding: 0.5em 0.75em;
+            background-color: gainsboro;
+            color: white;
+            border-radius: 0.5em;
+            transition: transform 0.3s ease-out, background-color 0.3s ease-out;
+        }
+
+        .nav-panel label::after {
+            content: " ☰";
+        }
+
+        .nav-panel--left .nav-menu {
+            transform: translateX(-100%);
+        }
+
+        .nav-panel--left label {
+            left: 2.25em;
+        }
+
         @starting-style {
-            #toggle2:checked ~ aside {
+            .nav-panel--left .nav-toggle:checked ~ .nav-menu {
+                width: 0;
+                padding: 0;
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+
+        .nav-panel--left:has(.nav-toggle:checked) label {
+            background-color: aliceblue;
+            color: lightskyblue;
+            transform: translateX(calc(var(--nav-panel-width) - 2.25em));
+            z-index: 10;
+            transition: transform 0.3s ease-out, background-color 0.3s ease-in;
+        }
+
+        .nav-panel--left:has(.nav-toggle:checked) label::after {
+            content: " ◀";
+        }
+
+        /* ============================
+           Wariant: panel z prawej
+           ============================ */
+
+        .nav-panel--right .nav-menu {
+            transform: translateX(100%);
+        }
+
+        .nav-panel--right label {
+            right: 3.25em;
+        }
+
+        @starting-style {
+            .nav-panel--right .nav-toggle:checked ~ .nav-menu {
                 width: 0;
                 padding: 0;
                 transform: translateX(100%);
@@ -167,25 +160,79 @@
             }
         }
 
-        #panel2:has(#toggle2:checked) label[for="toggle2"] {
-            background-color: aliceblue;
-            color: lightskyblue;
-            transform: translateX(-11em);
+        .nav-panel--right:has(.nav-toggle:checked) label {
+            transform: translateX(calc(-1 * (var(--nav-panel-width) - 3.25em)));
             z-index: 10;
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.5s ease-in;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease-in;
+        }
 
+        .nav-panel--right:has(.nav-toggle:checked) label::after {
+            content: " ▶";
+        }
+
+        /* ============================
+           Motyw kolorystyczny: niebieski
+           ============================ */
+
+        .nav-panel-blue {
+            --nav-accent: #007BFF;
+        }
+
+        .nav-panel-blue label {
             &:hover {
-                background-color: #e07020;
+                background-color: var(--nav-accent);
+            }
+        }
+
+        .nav-panel-blue:has(.nav-toggle:checked) label {
+            &:hover {
+                background-color: var(--nav-accent);
                 color: white;
             }
         }
 
-        #panel2:has(#toggle2:checked) label[for="toggle2"]::after {
-            content: " ▶";
+        .nav-panel-blue .nav-menu a {
+            min-width: 10em;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            background-color: var(--nav-accent);
+            padding: 0.5em 1em;
+            border-radius: 0.5em;
         }
 
-        #menu2 a {
-            background-color: #e07020;
+        /* ============================
+           Motyw kolorystyczny: pomarańczowy
+           ============================ */
+
+        .nav-panel-orange {
+            --nav-accent: #e07020;
+        }
+
+        .nav-panel-orange label {
+            &:hover {
+                background-color: var(--nav-accent);
+            }
+        }
+
+        .nav-panel-orange aside {            
+            background-color: antiquewhite;
+            color: white;
+        }
+        
+
+        .nav-panel-orange:has(.nav-toggle:checked) label {
+            background-color: moccasin;
+            color: var(--nav-accent);
+
+            &:hover {
+                background-color: var(--nav-accent);
+                color: white;
+            }
+        }
+
+        .nav-panel-orange .nav-menu a {
+            background-color: var(--nav-accent);
             color: white;
             text-decoration: none;
             padding: 0.5em 1em;
@@ -195,53 +242,25 @@
                 background-color: #007BFF;
             }
         }
+        
 
-        #menu {
-            a {
-                min-width: 10em;
-                text-decoration: none;
-                color: white;
-                font-weight: bold;
-                background-color: #007BFF;
-                padding: 0.5em 1em;
-                border-radius: 0.5em;
-            }
+        .nav-panel.nav-panel-settings label::after {
+            /* content: " \2699\FE0F"; */
+            content: " \2699";
+            color: dimgray;
         }
 
-        #content section {
-            margin-block: 2em;
-            padding: 2em;
-            border-bottom: 1px solid #ddd;
-            background-color: white;
-            border-radius: 0.5em;
-            margin-inline: 2em;
-
-            &:last-child {
-                border-bottom: none;
-            }
-
-            h1, h2, h3 {
-                color: #2e7d32;
-                margin-bottom: 0.5em;
-            }
-
-            ul {
-                padding-left: 1.5em;
-                line-height: 2;
-            }
-
-            p {
-                line-height: 1.7;
-                color: #333;
-            }
+        .nav-panel.nav-panel-home label::after {
+            content: " \2302";
+            color: black;
         }
     </style>
 </head>
-<body>
-    <nav id="panel">
-        <label for="toggle" title="pokazywanie menu"></label>
-        <input type="checkbox" id="toggle" title="pokaż menu" />
-        <aside id="menu" >
+<body>  
+    <nav class="nav-panel nav-panel--left nav-panel-blue nav-panel-home ">
+        <label for="toggle" title="pokazywanie menu, strona główna"></label>
+        <input type="checkbox" id="toggle" class="nav-toggle" title="pokaż menu" />
+        <aside class="nav-menu">
             <a href="#home">Home</a>
             <a href="#about">About</a>
         </aside>
@@ -285,10 +304,10 @@
             </ul>
         </section>
     </main>
-    <nav id="panel2">
+    <nav class="nav-panel nav-panel--right nav-panel-orange nav-panel-settings">
         <label for="toggle2" title="pokazywanie menu 2"></label>
-        <input type="checkbox" id="toggle2" title="pokaż menu 2" />
-        <aside id="menu2">
+        <input type="checkbox" id="toggle2" class="nav-toggle" title="pokazywanie menu ustawień" />
+        <aside class="nav-menu">
             <a href="#settings">Settings</a>
             <a href="#profile">Profile</a>
         </aside>
